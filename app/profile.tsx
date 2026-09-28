@@ -115,11 +115,15 @@ export default async function Page({
                 {t.firstName}
                 <span>
                   {t.lastName}
-                  <span style={{ display: 'inline', color: '#edf2ee' }}>.</span>
+                  <span
+                    style={{ display: 'inline', color: 'var(--foreground)' }}
+                  >
+                    .
+                  </span>
                 </span>
               </h1>
               <p className="intro">
-                <strong style={{ color: '#edf2ee', fontWeight: 500 }}>
+                <strong style={{ color: 'var(--foreground)', fontWeight: 500 }}>
                   {t.role}
                 </strong>
                 <br />
