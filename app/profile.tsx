@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { content } from './content';
 import { projects } from './projects';
 import { workProjects } from './work-projects';
+import packageJson from '../package.json';
 
 export function generateStaticParams() {
   return [{ lang: 'ru' }, { lang: 'en' }];
@@ -168,10 +169,7 @@ export default async function Page({
                   <>
                     {' '}
                     focus:{' '}
-                    <span className="code-green">
-                      &apos;Frontend&apos;
-                    </span>
-                    ,
+                    <span className="code-green">&apos;Frontend&apos;</span>,
                   </>,
                   <>
                     {' '}
@@ -456,7 +454,9 @@ export default async function Page({
           <span>
             © {new Date().getFullYear()} {t.name}
           </span>
-          <span>{t.footer}</span>
+          <span>
+            {t.footer} · v{packageJson.version}
+          </span>
           <a href="#main" className="text-link">
             {t.top} ↑
           </a>
