@@ -160,41 +160,43 @@ export default async function Page({
               <div className="code-body">
                 {[
                   <>
-                    <span className="code-muted">const</span> developer = {'{'}
+                    <span className="code-keyword">const</span>{' '}
+                    <span className="code-variable">developer</span> = {'{'}
                   </>,
                   <>
                     {' '}
-                    name:{' '}
-                    <span className="code-green">
+                    <span className="code-property">name</span>:{' '}
+                    <span className="code-string">
                       &apos;Ruslan Egorov&apos;
                     </span>
                     ,
                   </>,
                   <>
                     {' '}
-                    focus:{' '}
-                    <span className="code-green">&apos;Frontend&apos;</span>,
+                    <span className="code-property">focus</span>:{' '}
+                    <span className="code-string">&apos;Frontend&apos;</span>,
                   </>,
                   <>
                     {' '}
-                    stack: [
-                    <span className="code-green">&apos;Angular&apos;</span>,
-                    <span className="code-green">&apos;TypeScript&apos;</span>
+                    <span className="code-property">stack</span>: [
+                    <span className="code-string">&apos;Angular&apos;</span>,
+                    <span className="code-string">&apos;TypeScript&apos;</span>
                     ],
                   </>,
                   <>
                     {' '}
-                    workflow:{' '}
-                    <span className="code-green">&apos;Code + AI&apos;</span>,
+                    <span className="code-property">workflow</span>:{' '}
+                    <span className="code-string">&apos;Code + AI&apos;</span>,
                   </>,
                   <>
                     {' '}
-                    remote: <span className="code-green">true</span>,
+                    <span className="code-property">remote</span>:{' '}
+                    <span className="code-boolean">true</span>,
                   </>,
                   <>
                     {' '}
-                    basedIn:{' '}
-                    <span className="code-green">&apos;Krasnodar&apos;</span>
+                    <span className="code-property">basedIn</span>:{' '}
+                    <span className="code-string">&apos;Krasnodar&apos;</span>
                   </>,
                   <>{'};'}</>,
                 ].map((line, i) => (

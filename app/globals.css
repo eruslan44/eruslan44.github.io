@@ -2,17 +2,29 @@
 @import 'tw-animate-css';
 @import 'shadcn/tailwind.css';
 :root {
-  /* Base palette */
-  --background: #0b0e0c;
-  --foreground: #edf2ee;
-  --primary: #adf87b;
-  --card: #111713;
-  --secondary: #19231b;
-  --muted-foreground: #a6b0a8;
-  --border: #2b342d;
-  --green: #adf87b;
+  /* VS Code Dark Modern interface */
+  --background: #181818;
+  --foreground: #cccccc;
+  --primary: #4daafc;
+  --card: #1f1f1f;
+  --secondary: #2b2b2b;
+  --muted-foreground: #9d9d9d;
+  --border: #3c3c3c;
+  --heading: #ffffff;
+  --button-background: #0078d4;
+  --button-foreground: #ffffff;
+  --primary-hover: #026ec1;
+  --line-number: #6e7681;
 
-  /* Shared semantic colors */
+  /* Dark+ syntax palette inherited by Dark Modern */
+  --syntax-keyword: #c586c0;
+  --syntax-string: #ce9178;
+  --syntax-variable: #9cdcfe;
+  --syntax-type: #4ec9b0;
+  --syntax-function: #dcdcaa;
+  --syntax-number: #b5cea8;
+  --green: #6a9955;
+
   --card-foreground: var(--foreground);
   --popover: var(--card);
   --popover-foreground: var(--foreground);
@@ -24,58 +36,27 @@
   --input: var(--border);
   --ring: var(--primary);
 
-  /* Shades derived from the base palette */
-  --surface: color-mix(in srgb, var(--card) 90%, var(--background));
-  --surface-active: color-mix(in srgb, var(--secondary) 95%, var(--primary));
-  --surface-hover: color-mix(in srgb, var(--secondary) 98%, var(--primary));
-  --surface-place: color-mix(in srgb, var(--secondary) 65%, var(--background));
-  --primary-hover: color-mix(in oklab, var(--primary) 80%, var(--foreground));
+  --surface: var(--card);
+  --surface-active: var(--secondary);
+  --surface-hover: color-mix(in srgb, var(--secondary) 85%, var(--primary));
+  --surface-place: var(--card);
   --primary-glow: color-mix(in srgb, var(--primary) 33%, transparent);
   --primary-outline: color-mix(in srgb, var(--primary) 15%, transparent);
-  --border-strong: color-mix(in srgb, var(--border) 90%, var(--primary));
-  --border-panel: color-mix(in srgb, var(--border) 85%, var(--primary));
+  --border-strong: var(--border);
+  --border-panel: var(--border);
   --text-nav: color-mix(
-    in srgb,
-    var(--muted-foreground) 65%,
-    var(--foreground)
-  );
-  --text-subtle: color-mix(
-    in srgb,
-    var(--muted-foreground) 75%,
-    var(--background)
-  );
-  --text-faint: color-mix(
-    in srgb,
-    var(--muted-foreground) 50%,
-    var(--background)
-  );
-  --text-code: color-mix(in srgb, var(--muted-foreground) 85%, var(--primary));
-  --text-code-footer: color-mix(
-    in srgb,
-    var(--muted-foreground) 90%,
-    var(--foreground)
-  );
-  --text-tag: color-mix(
     in srgb,
     var(--muted-foreground) 70%,
     var(--foreground)
   );
-  --text-place: color-mix(
-    in srgb,
-    var(--muted-foreground) 65%,
-    var(--foreground)
-  );
-  --text-place-accent: color-mix(
-    in srgb,
-    var(--muted-foreground) 80%,
-    var(--primary)
-  );
-  --text-footer: color-mix(
-    in srgb,
-    var(--muted-foreground) 80%,
-    var(--background)
-  );
-  --code-dot: color-mix(in srgb, var(--border) 70%, var(--muted-foreground));
+  --text-subtle: var(--muted-foreground);
+  --text-faint: var(--line-number);
+  --text-code-footer: var(--muted-foreground);
+  --text-tag: var(--syntax-type);
+  --text-place: var(--muted-foreground);
+  --text-place-accent: var(--green);
+  --text-footer: var(--muted-foreground);
+  --code-dot: var(--line-number);
   --radius: 0.5rem;
   color-scheme: dark;
 }
@@ -186,6 +167,7 @@ a:focus-visible {
   margin: 36px 0 65px;
 }
 h1 {
+  color: var(--heading);
   font-size: clamp(54px, 6.5vw, 88px);
   font-weight: 500;
   line-height: 1.04;
@@ -194,7 +176,7 @@ h1 {
 }
 h1 span {
   display: block;
-  color: var(--primary);
+  color: var(--syntax-variable);
 }
 .intro {
   max-width: 560px;
@@ -213,8 +195,8 @@ h1 span {
   align-items: center;
   justify-content: space-between;
   gap: 34px;
-  background: var(--primary);
-  color: var(--primary-foreground);
+  background: var(--button-background);
+  color: var(--button-foreground);
   border-radius: 5px;
   padding: 14px 22px;
   font-weight: 600;
@@ -247,6 +229,7 @@ h1 span {
   box-shadow: 18px 22px 0 var(--surface);
 }
 .code-top {
+  background: var(--secondary);
   display: flex;
   align-items: center;
   gap: 7px;
@@ -278,11 +261,18 @@ h1 span {
   user-select: none;
   min-width: 14px;
 }
-.code-green {
-  color: var(--green);
+.code-string {
+  color: var(--syntax-string);
 }
-.code-muted {
-  color: var(--text-code);
+.code-keyword {
+  color: var(--syntax-keyword);
+}
+.code-variable,
+.code-property {
+  color: var(--syntax-variable);
+}
+.code-boolean {
+  color: var(--primary);
 }
 .code-foot {
   margin: 15px 24px 0;
@@ -292,6 +282,9 @@ h1 span {
   color: var(--text-code-footer);
   display: flex;
   justify-content: space-between;
+}
+.code-foot > span:first-child {
+  color: var(--green);
 }
 .stats {
   display: grid;
@@ -336,7 +329,7 @@ h1 span {
 }
 .section-label {
   padding-top: 10px;
-  color: var(--primary);
+  color: var(--syntax-keyword);
 }
 h2 {
   font-size: clamp(30px, 3.4vw, 44px);
@@ -368,7 +361,7 @@ p {
 }
 .principle .index {
   font: 13px monospace;
-  color: var(--primary);
+  color: var(--syntax-number);
   display: block;
   margin-bottom: 23px;
 }
@@ -412,7 +405,7 @@ p {
 }
 .job-role {
   font-size: 14px;
-  color: var(--primary);
+  color: var(--syntax-type);
   margin-bottom: 13px;
 }
 .job p:last-child {
@@ -424,7 +417,7 @@ p {
 }
 .project-group-label {
   margin: 0 0 18px;
-  color: var(--primary);
+  color: var(--syntax-keyword);
   font: 13px/1.5 monospace;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -444,13 +437,14 @@ p {
   background: var(--surface);
 }
 .work-project-category {
-  color: var(--primary);
+  color: var(--syntax-string);
   font: 11px/1.5 monospace;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 12px;
 }
 .work-project h3 {
+  color: var(--syntax-function);
   margin-bottom: 12px;
 }
 .work-project p,
@@ -533,7 +527,7 @@ p {
   flex-wrap: wrap;
   gap: 10px;
   align-items: center;
-  color: var(--primary);
+  color: var(--syntax-variable);
   font: 13px monospace;
   margin-bottom: 27px;
 }
@@ -565,6 +559,7 @@ p {
   margin-bottom: 38px;
 }
 .place h3 {
+  color: var(--syntax-function);
   font-size: 42px;
   letter-spacing: -1.5px;
 }
@@ -580,7 +575,7 @@ p {
 }
 .fact strong {
   font-weight: 500;
-  color: var(--primary);
+  color: var(--syntax-number);
 }
 .fact p {
   font-size: 14px;
