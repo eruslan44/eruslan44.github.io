@@ -4,6 +4,7 @@ import { Fragment } from 'react/jsx-runtime';
 import type { Metadata } from 'next';
 import { content } from './content';
 import { projects } from './projects';
+import { workProjects } from './work-projects';
 
 export function generateStaticParams() {
   return [{ lang: 'ru' }, { lang: 'en' }];
@@ -20,11 +21,11 @@ export async function generateMetadata({
       icon: { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
     },
     title: en
-      ? 'Ruslan Egorov — Frontend Developer'
-      : 'Руслан Егоров — Frontend-разработчик',
+      ? 'Ruslan Egorov — Lead Frontend Developer'
+      : 'Руслан Егоров — ведущий frontend-разработчик',
     description: en
-      ? 'Angular, TypeScript, web and mobile applications. 8+ years working remotely. Based in Krasnodar.'
-      : 'Angular, TypeScript, веб- и мобильные приложения. Более 8 лет удалённой работы. Краснодар.',
+      ? 'Lead Frontend Developer. Angular, TypeScript, enterprise web systems and mobile apps. Based in Krasnodar.'
+      : 'Ведущий frontend-разработчик. Angular, TypeScript, корпоративные веб-системы и мобильные приложения. Краснодар.',
     alternates: {
       canonical: `/${en ? 'en' : 'ru'}`,
       languages: { ru: '/ru', en: '/en' },
@@ -35,15 +36,17 @@ export async function generateMetadata({
 const skills = [
   'Angular',
   'TypeScript',
-  'JavaScript',
-  'HTML5 / CSS3',
-  'REST API',
-  'WebSockets',
-  'GitLab CI/CD',
-  'Cordova',
-  'Taiga UI',
   'PrimeNG',
+  'Taiga UI',
   'DevExtreme',
+  'OpenAPI',
+  'OData',
+  'WebSockets',
+  'Cordova',
+  'Firebase',
+  'GitLab CI/CD',
+  'Figma',
+  'Localization',
   'AI Agents',
 ];
 export default async function Page({
@@ -165,16 +168,17 @@ export default async function Page({
                   <>
                     {' '}
                     focus:{' '}
-                    <span className="code-green">&apos;Frontend&apos;</span>,
+                    <span className="code-green">
+                      &apos;Frontend&apos;
+                    </span>
+                    ,
                   </>,
                   <>
                     {' '}
                     stack: [
                     <span className="code-green">&apos;Angular&apos;</span>,
-                  </>,
-                  <>
-                    {' '}
-                    <span className="code-green">&apos;TypeScript&apos;</span>],
+                    <span className="code-green">&apos;TypeScript&apos;</span>
+                    ],
                   </>,
                   <>
                     {' '}
@@ -264,43 +268,86 @@ export default async function Page({
             <span className="section-label">03 / {t.nav[2]}</span>
             <h2>{t.projectsTitle}</h2>
           </div>
-          {projects.length ? (
-            <div className="projects-list">
-              {projects.map((p, index) => (
-                <a
-                  className="projects-panel project-link"
-                  key={p.url}
-                  href={p.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-labelledby={`project-title-${index}`}
-                >
-                  <div>
-                    <h3 id={`project-title-${index}`}>
-                      {p.title[lang]}{' '}
+          <div className="project-group">
+            <p className="project-group-label">{t.workProjectsHeading}</p>
+            <div className="work-projects-grid">
+              {workProjects.map((project) => (
+                <article className="work-project" key={project.name}>
+                  <span className="work-project-category">
+                    {project.category[lang]}
+                  </span>
+                  <h3>{project.name}</h3>
+                  <p>{project.description[lang]}</p>
+                  <ul>
+                    {project.highlights.map((highlight) => (
+                      <li key={highlight.en}>{highlight[lang]}</li>
+                    ))}
+                  </ul>
+                  <div className="work-project-stack">
+                    {project.stack.map((item) => (
+                      <span className="tag" key={item}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                  {project.url && (
+                    <a
+                      className="work-project-link"
+                      href={project.url}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {t.viewProject}
                       <ExternalLink
-                        size={17}
+                        size={16}
                         strokeWidth={1.75}
                         aria-hidden="true"
-                        className="link-icon"
                       />
-                    </h3>
-                    <p>{p.description[lang]}</p>
-                  </div>
-                </a>
+                    </a>
+                  )}
+                </article>
               ))}
             </div>
-          ) : (
-            <div className="projects-panel">
-              <div>
-                <h3>{t.projectsHeading}</h3>
-                <p>{t.projectsBody}</p>
-              </div>
-              <span className="projects-symbol" aria-hidden="true">
-                {'{ }'}
-              </span>
+          </div>
+          <div className="project-group">
+            <p className="project-group-label">{t.personalProjectsHeading}</p>
+            <div className="projects-list">
+              {projects.map((project, index) => {
+                const body = (
+                  <div>
+                    <h3 id={`project-title-${index}`}>
+                      {project.title[lang]}{' '}
+                      {project.url && (
+                        <ExternalLink
+                          size={17}
+                          strokeWidth={1.75}
+                          aria-hidden="true"
+                          className="link-icon"
+                        />
+                      )}
+                    </h3>
+                    <p>{project.description[lang]}</p>
+                  </div>
+                );
+                return project.url ? (
+                  <a
+                    className="projects-panel project-link"
+                    key={project.title.en}
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-labelledby={`project-title-${index}`}
+                  >
+                    {body}
+                  </a>
+                ) : (
+                  <article className="projects-panel" key={project.title.en}>
+                    {body}
+                  </article>
+                );
+              })}
             </div>
-          )}
+          </div>
         </section>
         <section className="section" id="about">
           <div className="section-head">
@@ -390,6 +437,14 @@ export default async function Page({
             <div className="contacts">
               <a className="email text-link" href="mailto:erus44@ya.ru">
                 erus44@ya.ru
+              </a>
+              <a
+                className="text-link"
+                href="https://www.linkedin.com/in/erus44"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
               </a>
               <span className="muted">{t.location}</span>
             </div>
