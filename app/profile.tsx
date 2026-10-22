@@ -1,11 +1,11 @@
 import { notFound } from 'next/navigation';
 import { ExternalLink, Send } from 'lucide-react';
 import { Fragment } from 'react/jsx-runtime';
-import type { Metadata } from 'next';
 import { content } from './content';
 import { projects } from './projects';
 import { workProjects } from './work-projects';
 import packageJson from '../package.json';
+import { profileMetadata, profileStructuredData } from './seo';
 
 export function generateStaticParams() {
   return [{ lang: 'ru' }, { lang: 'en' }];
@@ -14,25 +14,10 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ lang: string }>;
-}): Promise<Metadata> {
+}) {
   const { lang } = await params;
-  const en = lang === 'en';
-  return {
-    icons: {
-      icon: { url: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
-    },
-    title: en
-      ? 'Ruslan Egorov — Lead Frontend Developer'
-      : 'Руслан Егоров — ведущий frontend-разработчик',
-    description: en
-      ? 'Lead Frontend Developer. Angular, TypeScript, enterprise web systems and mobile apps. Based in Krasnodar.'
-      : 'Ведущий frontend-разработчик. Angular, TypeScript, корпоративные веб-системы и мобильные приложения. Краснодар.',
-    alternates: {
-      canonical: `/${en ? 'en' : 'ru'}`,
-      languages: { ru: '/ru', en: '/en' },
-    },
-    metadataBase: new URL('https://eruslan44.github.io'),
-  };
+  if (lang !== 'ru' && lang !== 'en') notFound();
+  return profileMetadata(lang);
 }
 const skills = [
   'Angular',
@@ -60,12 +45,21 @@ export default async function Page({
   const t = content[lang];
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(profileStructuredData(lang, skills)).replace(
+            /</g,
+            '\\u003c',
+          ),
+        }}
+      />
       <a className="skip" href="#main">
         {t.skip}
       </a>
       <header className="header">
         <div className="wrap header-inner">
-          <a href={`/${lang}`} className="logo" aria-label={t.name}>
+          <a href={`/${lang}/`} className="logo" aria-label={t.name}>
             re<span>.</span>
           </a>
           <nav className="navigation" aria-label={t.navLabel}>
@@ -82,7 +76,7 @@ export default async function Page({
           <nav className="language" aria-label={t.language}>
             {/* oxlint-disable-next-line next/no-html-link-for-pages -- Load the complete Russian document. */}
             <a
-              href="/ru"
+              href="/ru/"
               lang="ru"
               hrefLang="ru"
               className={lang === 'ru' ? 'active' : ''}
@@ -92,7 +86,7 @@ export default async function Page({
             </a>
             {/* oxlint-disable-next-line next/no-html-link-for-pages -- Load the complete English document. */}
             <a
-              href="/en"
+              href="/en/"
               lang="en"
               hrefLang="en"
               className={lang === 'en' ? 'active' : ''}

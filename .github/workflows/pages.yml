@@ -31,16 +31,10 @@ jobs:
         run: npm ci
       - name: Build static site
         run: npm run build
-      - name: Prepare GitHub Pages files
+      - name: Check code
         run: |
-          test -s dist/client/index.html
-          test -s dist/client/ru.html
-          test -s dist/client/en.html
-          mkdir -p dist/client/ru dist/client/en
-          cp dist/client/ru.html dist/client/ru/index.html
-          cp dist/client/en.html dist/client/en/index.html
-          rm -rf dist/client/.vite dist/client/.assetsignore
-          touch dist/client/.nojekyll
+          npm run lint
+          npx tsc --noEmit
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
       - name: Upload site artifact

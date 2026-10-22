@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#181818"/><rect x="0" y="0" width="1200" height="8" fill="#4daafc"/>
+<g font-family="Arial,Helvetica,sans-serif"><text x="72" y="104" fill="#cccccc" font-size="34" font-weight="700">re<tspan fill="#4daafc">.</tspan></text>
+<text x="1128" y="100" text-anchor="end" fill="#9d9d9d" font-size="22">Krasnodar · Remote</text>
+<text x="72" y="262" fill="#ffffff" font-size="76" font-weight="700">Ruslan Egorov</text>
+<text x="76" y="332" fill="#4daafc" font-size="34">Lead Frontend Developer</text>
+<text x="76" y="394" fill="#cccccc" font-size="25">Enterprise web systems and mobile apps</text>
+<path d="M76 458H1124" stroke="#3c3c3c"/>
+<text x="76" y="528" fill="#4ec9b0" font-size="25">Angular / TypeScript</text>
+<text x="1124" y="528" text-anchor="end" fill="#9d9d9d" font-size="23">eruslan44.github.io</text></g></svg>
