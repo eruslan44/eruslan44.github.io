@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://eruslan44.github.io/sitemap.xml

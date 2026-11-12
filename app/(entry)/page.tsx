@@ -1,4 +1,7 @@
+import { profileMetadata } from '../seo';
+
 export const dynamic = 'force-static';
+export const metadata = profileMetadata('ru');
 
 export default function Home() {
   return (
